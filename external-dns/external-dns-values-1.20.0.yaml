@@ -213,9 +213,6 @@ sources:
   - service
   - ingress
   - gateway-httproute
-  - gateway-tlsroute
-  - gateway-tcproute
-  - gateway-udproute
 
 # -- How DNS records are synchronized between sources and providers; available values are `create-only`, `sync`, & `upsert-only`.
 policy: upsert-only  # @schema enum:[create-only, sync, upsert-only]; type:string; default: "upsert-only"
@@ -224,7 +221,7 @@ policy: upsert-only  # @schema enum:[create-only, sync, upsert-only]; type:strin
 # Valid values are `txt`, `aws-sd`, `dynamodb` & `noop`.
 registry: txt  # @schema enum:[txt, aws-sd, dynamodb, noop]; default: "txt"
 # -- (string) Specify an identifier for this instance of _ExternalDNS_ when using a registry other than `noop`.
-txtOwnerId:  # @schema type:[string, null]; default: null
+txtOwnerId: terraform-cluster  # @schema type:[string, null]; default: null
 # -- (string) Specify a prefix for the domain names of TXT records created for the `txt` registry.
 # Mutually exclusive with `txtSuffix`.
 txtPrefix:  # @schema type:[string, null]; default: null
@@ -233,7 +230,8 @@ txtPrefix:  # @schema type:[string, null]; default: null
 txtSuffix:  # @schema type:[string, null]; default: null
 
 # -- Limit possible target zones by domain suffixes.
-domainFilters: []
+domainFilters: 
+  - devops-hub.in
 
 # -- Intentionally exclude domains from being managed.
 excludeDomains: []
@@ -324,4 +322,3 @@ secretConfiguration:
 
 # -- (bool) No effect - reserved for use in sub-charting.
 enabled:  # @schema type: [boolean, null]; description: No effect - reserved for use in sub-charting
-
