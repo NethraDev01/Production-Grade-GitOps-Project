@@ -5,10 +5,12 @@ resources:
   - microservices-extra-kube-manifests/HTTProute.yaml
   - microservices-extra-kube-manifests/target-grp.yaml
 
+helmGlobals:
+  chartHome: charts
+
 helmCharts:
   - name: onlineboutique
-    repo: oci://ghcr.io/nethradev01
     version: 0.10.4
     releaseName: boutique-app
     namespace: boutique-app
-    valuesFile: helm-chart/values.yaml
+    valuesFile: charts/onlineboutique/values.yaml
